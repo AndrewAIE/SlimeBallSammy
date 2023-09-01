@@ -1,48 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ButtonEvents : MonoBehaviour
 {
 
     private string _activeSceneName;
     static string Active;
-
-    private GameObject _activeGameCanvas;
-    private GameObject _pauseGameCanvas;
-
     static string PreviousScene;
 
+    public GameObject _pauseMenu;
+
+    public Canvas GameplayCanvas;
+
+    //private Canvas _canvasGame;
+    //private Canvas _canvasPause;
+
     // fix this later
-    private void Start()
+    public void Start()
     {
-        DontDestroyOnLoad(this);
+
+       
         // find active scene
         Active = SceneManager.GetActiveScene().name;
-        _activeSceneName = Active;
+        
 
-        // if active scene is gamplay then find the UI canvas
-        if (Active == "TESTGamePlayUI")
-        {
-            _activeGameCanvas = GameObject.FindGameObjectWithTag("ActiveGameUI");
-            _pauseGameCanvas = GameObject.FindGameObjectWithTag("PauseMenu");
+       //if (Active == "OptionsMenu")
+       //{
+       //    DontDestroyOnLoad(this);
+       //}
+       //// || pines dont work?
+       //if (Active == "MainMenu")
+       //{
+       //    DontDestroyOnLoad(this);
+       //}
 
-            _pauseGameCanvas.SetActive(false);
-        }
+        // Managment for the Game Screen
+        
+
+        //  GameplayCanvas = GameObject.FindObjectOfType<Canvas>();
+        // 
+        //  if (GameplayCanvas != null)
+        //  {
+        //      _pauseMenu = GameObject.Find("PauseMenu");
+        // 
+        //     _pauseMenu.SetActive(false);
+        //  }
+
+
+
+
+
+    }
+
+    void FindSomething(GameObject Menu, string MenuName)
+    {
+        Menu = GameObject.Find(MenuName);
     }
 
     public void GoToPauseMenu()
     {
-        _activeGameCanvas.SetActive(false);
-        _pauseGameCanvas.SetActive(true);
-
-        // when gameloop script is finished implement the a pause the the funcvtion
-
-
-        // rember on the " back to game menu to set each canvas bac to defult
+        //FindSomething(_pauseMenu, "PauseMenu");
+        _pauseMenu.SetActive(true);
     }
 
     public void GoToOptions()
@@ -54,16 +79,14 @@ public class ButtonEvents : MonoBehaviour
 
     public void PlayGame()
     {
+        
         SceneManager.LoadScene("TESTGameplayUI");
+        Start();
     }
 
     public void BackToPlay()
     {
-        // when game loop finsiedh impliment code where the gameplay 'unpauses'
-        // so then the game isnt frozen whgen the UIgoes away
-
-        _activeGameCanvas.SetActive(true);
-        _pauseGameCanvas.SetActive(false);
+        _pauseMenu.SetActive(false);
     }
 
     public void BackFromOptions()
@@ -71,7 +94,11 @@ public class ButtonEvents : MonoBehaviour
         //string _prevName;
         //_prevName = PreviousScene.name;
         SceneManager.LoadScene(PreviousScene);
+    }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
