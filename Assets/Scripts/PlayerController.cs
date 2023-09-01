@@ -13,14 +13,13 @@ public class PlayerController : MonoBehaviour
     Vector2 m_slingPos;
     Vector2 m_slingVector;
     Vector2 m_slingDirection;
-    Vector3 m_worldSize;
-
-    bool m_dragging = false;
+    Vector3 m_worldSize;    
 
     [SerializeField]
     private float m_slingLimit;
     private float m_slingLength;
 
+    public BoxCollider2D m_boxCollider;
     
         
     enum State
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
         Falling,
         Dying
     }
-    private State m_state = State.Falling;
+    private State m_state = State.Stuck;
 
 
     private Rigidbody2D m_playerBody;
@@ -41,6 +40,7 @@ public class PlayerController : MonoBehaviour
         m_sling = transform.GetChild(0).gameObject;
         m_playerBody = GetComponent<Rigidbody2D>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
+        m_boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
@@ -77,44 +77,10 @@ public class PlayerController : MonoBehaviour
         }
         if (m_playerPos.y < -m_worldSize.y)
         {
-            Dying();
+            m_state = State.Dying;
         }
     }
-
-    public void OnMouseDown()
-    {
-        m_dragging = true;
-    }
-
-    public void OnMouseDrag()
-    {
-        if (m_dragging)
-        {
-            m_sling.SetActive(true);
-            m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            //Create vector between the Mouse Position and the Player, along with its magnitude and normalization
-            m_slingVector = m_slingPos - m_playerPos;
-            m_slingLength = m_slingVector.magnitude;
-            m_slingDirection = m_slingVector.normalized;
-            //Limit the length the sling can be
-            if (m_slingLength > m_slingLimit)
-            {
-                m_slingLength = m_slingLimit;
-            }
-            //Set Vector to new length and set sling "Handle" position
-            m_slingVector = m_slingLength * m_slingDirection;
-            m_sling.transform.position = m_playerPos + m_slingVector;
-        }
-    }
-
-    public void OnMouseUp()
-    {
-        m_playerBody.AddForce(m_slingVector * -1, ForceMode2D.Impulse);
-        m_dragging = false;
-
-        m_sling.SetActive(false);
-    }
+    
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -131,17 +97,47 @@ public class PlayerController : MonoBehaviour
     
     public void Stuck()
     {
-
+        if(Input.GetMouseButton(0))
+        {
+            m_state = State.Stretch;
+        }
     }
 
     public void Stretch()
     {
+        m_sling.SetActive(true);
+        m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+        //Create vector between the Mouse Position and the Player, along with its magnitude and normalization
+        m_slingVector = m_slingPos - m_playerPos;
+        m_slingLength = m_slingVector.magnitude;
+        m_slingDirection = m_slingVector.normalized;
+        //Limit the length the sling can be
+        if (m_slingLength > m_slingLimit)
+        {
+            m_slingLength = m_slingLimit;
+        }
+        //Set Vector to new length and set sling "Handle" position
+        m_slingVector = m_slingLength * m_slingDirection;
+        m_sling.transform.position = m_playerPos + m_slingVector;
+        //On mouse up, remove from parent, add force and change state and turn off sling indicator
+        if(Input.GetMouseButtonUp(0) && m_slingPos.y <= m_playerPos.y)
+        {
+            m_playerBody.AddForce(m_slingVector * -1, ForceMode2D.Impulse);
+            m_sling.SetActive(false);
+            m_state = State.Flying;
+        }
+        if (Input.GetMouseButtonUp(0) && m_slingPos.y > m_playerPos.y)
+        {
+            m_playerBody.AddForce(m_slingVector * -1, ForceMode2D.Impulse);
+            m_sling.SetActive(false);
+            m_state = State.Falling;
+        }
     }
 
     public void Flying()
     {
-
+        
     }
 
     public void Falling()
@@ -152,10 +148,13 @@ public class PlayerController : MonoBehaviour
     public void Dying()
     {
         transform.position = new Vector3(0, 0, 0);
-        m_playerBody.velocity = Vector2.zero;
-        //m_state = 
+        m_playerBody.velocity = Vector2.zero;        
     }
 
-
+    private void OnCollisionEnter2D(Collision collision)
+    {
+        
+        if(collision.collider)
+    }
 
 }
