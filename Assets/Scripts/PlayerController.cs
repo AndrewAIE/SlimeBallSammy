@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private float m_slingLength;
 
     public BoxCollider2D m_boxCollider;
+
+    public string m_collisionTag;
     
         
     enum State
@@ -82,11 +84,7 @@ public class PlayerController : MonoBehaviour
     }
     
 
-    public void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        GameObject box = hit.gameObject;
-        Attach(box);
-    }
+    
 
     public void Attach(GameObject box)
     {
@@ -121,6 +119,7 @@ public class PlayerController : MonoBehaviour
         m_slingVector = m_slingLength * m_slingDirection;
         m_sling.transform.position = m_playerPos + m_slingVector;
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
+        //if thre are any inconsistencies with physics, call physics in Fixed Update
         if(Input.GetMouseButtonUp(0) && m_slingPos.y <= m_playerPos.y)
         {
             m_playerBody.AddForce(m_slingVector * -1, ForceMode2D.Impulse);
@@ -151,10 +150,9 @@ public class PlayerController : MonoBehaviour
         m_playerBody.velocity = Vector2.zero;        
     }
 
-    private void OnCollisionEnter2D(Collision collision)
-    {
-        
-        if(collision.collider)
-    }
+    
+
+    
+    
 
 }
