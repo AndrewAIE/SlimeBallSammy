@@ -6,6 +6,10 @@ TagManager:
   tags:
   - ActiveGameUI
   - PauseMenu
+  - Block
+  - Ice
+  - Break
+  - Death
   layers:
   - Default
   - TransparentFX
