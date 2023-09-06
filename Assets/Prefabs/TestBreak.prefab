@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8031556955151980859}
   m_Layer: 0
   m_Name: TestBreak
-  m_TagString: Untagged
+  m_TagString: Break
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8456a74f5f3ec47bfe05e41abd3240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fallSpeed: 3
+  m_fallSpeed: 0.5

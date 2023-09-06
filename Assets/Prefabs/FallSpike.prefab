@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8771965764311030885}
   m_Layer: 0
   m_Name: FallSpike
-  m_TagString: Untagged
+  m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.44991076, z: 0.24902487}
-  m_Center: {x: -1.802903e-18, y: 0.17986435, z: 0.0018262565}
+  m_Size: {x: 0.28805247, y: 0.5242933, z: 0.24902487}
+  m_Center: {x: 0.0017710477, y: 0.21705566, z: 0.0018262565}
 --- !u!54 &8771965764311030884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8456a74f5f3ec47bfe05e41abd3240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fallSpeed: 3
+  m_fallSpeed: 0.5

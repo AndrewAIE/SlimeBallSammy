@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class BlockMovement : MonoBehaviour
@@ -9,13 +10,15 @@ public class BlockMovement : MonoBehaviour
 
     private Rigidbody m_rb;
 
-    [SerializeField]
-    private float m_fallSpeed;
+    public float m_fallSpeed;
+
+    //private SpawnBlocks m_sb;
 
     // Start is called before the first frame update
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
+        //m_sb.GetComponent<SpawnBlocks>();
     }
 
     // Update is called once per frame
