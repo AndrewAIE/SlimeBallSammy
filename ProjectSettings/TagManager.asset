@@ -10,6 +10,7 @@ TagManager:
   - Ice
   - Break
   - Death
+  - KillZone
   layers:
   - Default
   - TransparentFX
