@@ -150,9 +150,10 @@ public class PlayerController : MonoBehaviour
 
     public void Dying()
     {
-        m_animation.Play("DeathAnimation");
+        m_animation.Play("DeathAnimation");        
         m_collider.enabled = false;
         m_playerBody.useGravity = false;
+        m_playerBody.velocity = Vector2.zero;
         StartCoroutine(ResetPosition());
     }
 
@@ -219,7 +220,7 @@ public class PlayerController : MonoBehaviour
         m_state = State.Falling;
     }
 
-    private void Detach()
+    public void Detach()
     {
         //remove block as parent, and enter falling state
         transform.SetParent(null);

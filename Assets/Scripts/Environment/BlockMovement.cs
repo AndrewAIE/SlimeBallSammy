@@ -31,6 +31,11 @@ public class BlockMovement : MonoBehaviour
     {
         if (other.tag == "KillZone")
         {
+            if(GetComponentInChildren<Transform>() != null)
+            {
+                GetComponentInChildren<PlayerController>().Detach();
+            }
+
             Destroy(gameObject);
         }   
     }
