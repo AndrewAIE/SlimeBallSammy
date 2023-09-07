@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TESTGameplayUI.unity
     guid: 8db41f59fbbea5747ac24c7e67c6ed86
+  - enabled: 1
+    path: Assets/Scenes/PROTOTYPE1.unity
+    guid: 9571874acf09fdc4496eb2c441bd725d
   m_configObjects: {}

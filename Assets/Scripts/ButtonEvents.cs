@@ -83,11 +83,12 @@ public class ButtonEvents : MonoBehaviour
          PreviousScene = SceneManager.GetActiveScene().name;
 
         SceneManager.LoadScene("OptionsMenu");
+        Time.timeScale = 1f;
     }
 
     public void PlayGame()
     {
-        
+        Time.timeScale = 1f;
         SceneManager.LoadScene("PROTOTYPE1");
         Start();
     }
@@ -113,6 +114,7 @@ public class ButtonEvents : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 
