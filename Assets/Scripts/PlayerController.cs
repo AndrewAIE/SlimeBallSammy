@@ -94,10 +94,19 @@ public class PlayerController : MonoBehaviour
     
     public void Stuck()
     {
+        //If player clicks on "Player" enter stretch state
         m_animation.Play("StickDown");
         if(Input.GetMouseButtonDown(0))
         {
-            m_state = State.Stretch;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.tag == "Player")
+                {
+                    m_state = State.Stretch;
+                }
+            }            
         }
     }
 
@@ -122,26 +131,22 @@ public class PlayerController : MonoBehaviour
         //if there are any inconsistencies with physics, call physics in Fixed Update
         if(Input.GetMouseButtonUp(0))
         {
-               
-            m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
-            m_sling.SetActive(false);            
             m_state = State.Flying;
+            m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
+            m_sling.SetActive(false);          
+           
         }        
     }
-
     public void Flying()
     {        
         m_animation.Play("FlyAnimation");
         transform.up = m_playerBody.velocity.normalized;
         transform.localScale = Vector3.one * 0.8f;
     }
-
     public void Falling()
-    {
-        
+    {        
         m_animation.Play("FallAnimation");
     }
-
     public void Dying()
     {
         m_animation.Play("DeathAnimation");        
@@ -150,7 +155,6 @@ public class PlayerController : MonoBehaviour
         m_playerBody.velocity = Vector2.zero;
         StartCoroutine(ResetPosition());
     }
-
     public void OnCollisionEnter(Collision other)
     {
         //check what type of block the player is colliding with
@@ -182,19 +186,18 @@ public class PlayerController : MonoBehaviour
                 m_state = State.Dying;
                 break;
         }
-    }
-   
-   
-   
+    }   
     public void OnCollisionExit(Collision other)
     {
         m_playerBody.useGravity = true;
         transform.SetParent(null);
+        if(m_state == State.Stuck || m_state == State.Stretch)
+        {
+            Detach();
+        }
     }
 
-
-    IEnumerator DestroyBlock(GameObject block)
-    {        
+    IEnumerator DestroyBlock(GameObject block)    {        
         //wait half a second, and then destroy block
         yield return new WaitForSecondsRealtime(0.5f);
         //if player is still attached to block, detach
@@ -213,18 +216,16 @@ public class PlayerController : MonoBehaviour
         m_playerBody.velocity = Vector2.zero;
         m_state = State.Falling;
     }
-
     public void Detach()
     {
         //remove block as parent, and enter falling state
         transform.SetParent(null);
         m_playerBody.useGravity = true;
         m_state = State.Falling;
+        transform.rotation = Quaternion.identity;
         if (m_sling.activeInHierarchy== true)
         {
             m_sling.SetActive(false);
         }
     }
-
-
 }

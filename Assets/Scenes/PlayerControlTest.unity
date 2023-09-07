@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &24568886
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &138639305
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -679,6 +679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sammy
       objectReference: {fileID: 0}
+    - target: {fileID: 15527797052199435, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 15527797052199439, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -689,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 15527797052199439, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2175746
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 15527797052199439, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
       propertyPath: m_LocalPosition.z
