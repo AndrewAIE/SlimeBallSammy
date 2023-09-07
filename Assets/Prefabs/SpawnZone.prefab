@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642983698780311739}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
   m_Name: 
@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
   - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
   - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints: []
   blockFallSpeed: 0
 --- !u!1 &1642983698887742632
 GameObject:
@@ -62,6 +63,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642983698887742633}
+  - component: {fileID: -2173834941384822589}
   m_Layer: 0
   m_Name: SpawnZone
   m_TagString: Untagged
@@ -89,6 +91,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2173834941384822589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642983698887742632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnBlocks:
+  - {fileID: 7125424579339960239, guid: e36a14efe7fe54341a36f48d486fec76, type: 3}
+  - {fileID: 7125424579339960239, guid: e36a14efe7fe54341a36f48d486fec76, type: 3}
+  - {fileID: 7125424579339960239, guid: e36a14efe7fe54341a36f48d486fec76, type: 3}
+  - {fileID: 6204887806489096818, guid: 089b661ec00f251468113eb9e72feaf5, type: 3}
+  - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
+  - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
+  - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints:
+  - {fileID: 1642983700164504918}
+  - {fileID: 1642983699294435775}
+  - {fileID: 1642983699224845293}
+  - {fileID: 1642983699985297525}
+  - {fileID: 1642983698780311739}
+  blockFallSpeed: 0
 --- !u!1 &1642983699224845293
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +157,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642983699224845293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
   m_Name: 
@@ -141,6 +170,7 @@ MonoBehaviour:
   - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
   - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
   - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints: []
   blockFallSpeed: 0
 --- !u!1 &1642983699294435775
 GameObject:
@@ -181,7 +211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642983699294435775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
   m_Name: 
@@ -194,6 +224,7 @@ MonoBehaviour:
   - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
   - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
   - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints: []
   blockFallSpeed: 0
 --- !u!1 &1642983699985297525
 GameObject:
@@ -234,7 +265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642983699985297525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
   m_Name: 
@@ -247,6 +278,7 @@ MonoBehaviour:
   - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
   - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
   - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints: []
   blockFallSpeed: 0
 --- !u!1 &1642983700164504918
 GameObject:
@@ -287,7 +319,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642983700164504918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf844b2b8c9a78479b5b64659a133df, type: 3}
   m_Name: 
@@ -300,4 +332,5 @@ MonoBehaviour:
   - {fileID: 2128372747875711833, guid: c082066b2da20e2409862d957ffdbbda, type: 3}
   - {fileID: 1164074256589397739, guid: cfbc6fbf995eebf49a64312a006a51b4, type: 3}
   - {fileID: 8771965764311030890, guid: fe0b16527010e6c4e82df9644947c8b2, type: 3}
+  m_spawnPoints: []
   blockFallSpeed: 0

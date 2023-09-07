@@ -7,13 +7,14 @@ public class SpawnBlocks : MonoBehaviour
 {
     public GameObject[] spawnBlocks;
 
+    [SerializeField]
+    private GameObject[] m_spawnPoints;
+
     private IEnumerator spawn;
 
     private bool m_canSpawn = true;
 
     public float blockFallSpeed;
-
-    //private BlockMovement m_bm;
 
     //To count frames before adjusting speed (This should be edited later to account for height)
     private float m_speedCounter;
@@ -21,6 +22,9 @@ public class SpawnBlocks : MonoBehaviour
     private bool m_startGame = true;
 
     private bool m_changeSpeed = true;
+
+    private int m_spwn1;
+    private int m_spwn2;
 
     private float m_shortestSpawnTime = 4.0f;
     private float m_longestSpawnTime = 5.5f;
@@ -34,7 +38,7 @@ public class SpawnBlocks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawn = SpawnBlock(spawnBlocks[Random.Range(0, 7)], Random.Range(m_shortestSpawnTime, m_longestSpawnTime));
+        spawn = SpawnBlock(m_shortestSpawnTime); //spawnBlocks[Random.Range(0, 7)], 
         if (m_canSpawn)
         {
             StartCoroutine(spawn);
@@ -51,11 +55,23 @@ public class SpawnBlocks : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnBlock(GameObject block, float time)
+    IEnumerator SpawnBlock(float time)
     {
         m_canSpawn = false;
         yield return new WaitForSeconds(time);
-        Instantiate(block, transform.position, Quaternion.identity, transform);
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    
+        //}
+        m_spwn1 = Random.Range(0, 5);
+        m_spwn2 = Random.Range(0, 5);
+        while (m_spwn2 == m_spwn1)
+        {
+            m_spwn2 = Random.Range(0, 5);
+        }
+        Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn1].transform.position, Quaternion.identity, transform);
+        Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn2].transform.position, Quaternion.identity, transform);
+        //Instantiate(block, transform.position, Quaternion.identity, transform);
         m_canSpawn = true;
         
     }
