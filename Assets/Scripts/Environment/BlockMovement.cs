@@ -24,7 +24,8 @@ public class BlockMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_rb.velocity = Vector3.down * m_fallSpeed;
+        //m_rb.velocity = Vector3.down * m_fallSpeed;
+        transform.Translate(Vector3.down * m_fallSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
