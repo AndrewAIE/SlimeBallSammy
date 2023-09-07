@@ -17,6 +17,11 @@ public class ButtonEvents : MonoBehaviour
 
     public GameObject _pauseMenu;
 
+    public GameObject [] GameFunctions;
+    public GameObject [] SpawnerObjects;
+
+    GameObject Transform_list;
+
     public Canvas GameplayCanvas;
 
     //private Canvas _canvasGame;
@@ -68,6 +73,9 @@ public class ButtonEvents : MonoBehaviour
     {
         //FindSomething(_pauseMenu, "PauseMenu");
         _pauseMenu.SetActive(true);
+
+        Time.timeScale = 0f;
+
     }
 
     public void GoToOptions()
@@ -80,13 +88,20 @@ public class ButtonEvents : MonoBehaviour
     public void PlayGame()
     {
         
-        SceneManager.LoadScene("TESTGameplayUI");
+        SceneManager.LoadScene("PROTOTYPE1");
         Start();
     }
 
     public void BackToPlay()
     {
         _pauseMenu.SetActive(false);
+        for (int i = 0; i < GameFunctions.Length; i++)
+        {
+            GameFunctions[i].SetActive(true);
+        }
+        Time.timeScale = 1f;
+
+
     }
 
     public void BackFromOptions()
