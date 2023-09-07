@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fallSpeed: 0.5
+  m_spawnBlocks: {fileID: 1642983698887742632, guid: b694829e94bef5e4e85c921394430ce5, type: 3}
 --- !u!65 &7125424579339960230
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ TagManager:
   - Break
   - Death
   - KillZone
+  - SpawnZone
   layers:
   - Default
   - TransparentFX
