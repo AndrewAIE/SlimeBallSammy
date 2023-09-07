@@ -27,12 +27,6 @@ public class PlayerController : MonoBehaviour
     private Animator m_animation;
     SphereCollider m_collider;
     
-    
-
-    
-
-
-           
     enum State
     {
         Stuck,
@@ -128,16 +122,15 @@ public class PlayerController : MonoBehaviour
         //if there are any inconsistencies with physics, call physics in Fixed Update
         if(Input.GetMouseButtonUp(0))
         {
+               
             m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
-            m_sling.SetActive(false);
-                      
+            m_sling.SetActive(false);            
             m_state = State.Flying;
-        }
-        
+        }        
     }
 
     public void Flying()
-    {
+    {        
         m_animation.Play("FlyAnimation");
         transform.up = m_playerBody.velocity.normalized;
         transform.localScale = Vector3.one * 0.8f;
@@ -145,6 +138,7 @@ public class PlayerController : MonoBehaviour
 
     public void Falling()
     {
+        
         m_animation.Play("FallAnimation");
     }
 
@@ -169,7 +163,7 @@ public class PlayerController : MonoBehaviour
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
                 transform.up = other.contacts[0].normal;
-                transform.SetParent(other.transform, true); 
+                transform.SetParent(other.transform, true);
                 break;
            case "Ice":
                 m_state = State.Stuck;
