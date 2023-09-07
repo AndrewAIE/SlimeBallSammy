@@ -14,7 +14,9 @@ public class HighscoreTimer : MonoBehaviour
         if (timer < 999999)
         {
             timer += Time.deltaTime;
-            Highscore.text = timer.ToString();
+
+            Highscore.text = string.Format("{0:00}", timer);
+           // Highscore.text = timer.ToString();
 
         }
     }

@@ -287,7 +287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 215087079}
   _x: 0
-  _y: 0.1
+  _y: 0.08
   height: 0
 --- !u!1 &287179398
 GameObject:
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 1243414002}
   _x: 0
-  _y: 0.1
+  _y: 0.05
   height: 0
 --- !u!1 &1258165026
 GameObject:
