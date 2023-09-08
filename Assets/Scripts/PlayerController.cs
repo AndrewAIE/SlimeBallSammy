@@ -81,14 +81,10 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(m_worldSize.x, m_playerPos.y, 0);
         }
+        //if player hits bottom of screen, they will die
         if (m_playerPos.y < -m_worldSize.y)
         {
             m_state = State.Dying;
-        }
-
-        if(Input.GetKey(KeyCode.Space))
-        {
-            Debug.Log("State = " + m_state);
         }
     }
     
@@ -112,6 +108,8 @@ public class PlayerController : MonoBehaviour
 
     public void Stretch()
     {
+        RaycastHit hit;
+
         m_sling.SetActive(true);
         m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -129,12 +127,19 @@ public class PlayerController : MonoBehaviour
         m_sling.transform.position = m_playerPos + m_slingVector;
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
         //if there are any inconsistencies with physics, call physics in Fixed Update
+
         if(Input.GetMouseButtonUp(0))
         {
-            m_state = State.Flying;
-            m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
-            m_sling.SetActive(false);          
-           
+            if(Physics.SphereCast(m_playerPos, m_collider.radius, m_slingDirection * -1, out hit, 0.1f))
+            {
+
+            }
+            else
+            {
+                m_state = State.Flying;
+                m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
+                m_sling.SetActive(false);
+            }           
         }        
     }
     public void Flying()
