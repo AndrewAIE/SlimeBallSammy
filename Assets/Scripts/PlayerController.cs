@@ -94,15 +94,8 @@ public class PlayerController : MonoBehaviour
         m_animation.Play("StickDown");
         if(Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
-            {
-                if(hit.collider.tag == "Player")
-                {
-                    m_state = State.Stretch;
-                }
-            }            
+            m_state = State.Stretch;
+                     
         }
     }
 

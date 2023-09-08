@@ -7,6 +7,8 @@ public class StarterBlock : MonoBehaviour
     public float m_fallSpeed;
     bool m_isMoving = false;
     float m_timer = 0;
+    [SerializeField]
+    float m_startTimer;
     
 
     // Update is called once per frame
@@ -19,7 +21,7 @@ public class StarterBlock : MonoBehaviour
         else
         {
             m_timer += Time.deltaTime;
-            if (m_timer >= 2.5f)
+            if (m_timer >= m_startTimer)
             {
                 m_isMoving = true;
             }            
