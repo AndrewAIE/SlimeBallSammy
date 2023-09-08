@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class HighscoreTimer : MonoBehaviour
 {
-    private float timer = 10;
+    private float timer = 0;
     public TMP_Text Highscore;
 
     void Update()
