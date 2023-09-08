@@ -44,6 +44,27 @@ public class BlockMovement : MonoBehaviour
 
             Destroy(gameObject);
         }   
+
+        if (other.tag == "Player")
+        {
+            StartCoroutine(FadeBlock(gameObject));
+        }
+
+    }
+
+    IEnumerator FadeBlock(GameObject block)
+    {
+        Material mat = block.GetComponent<Material>();
+
+        for (int i = 0; i < 26; i++)
+        {
+            Debug.Log("Womp");
+            Color color = mat.color;
+            color.a -= 10;
+            mat.color = color;
+            yield return new WaitForSeconds(0.2f);
+            block.GetComponent<Renderer>().material = mat;
+        }
     }
 
     

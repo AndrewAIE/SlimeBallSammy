@@ -69,7 +69,7 @@ public class SpawnBlocks : MonoBehaviour
         {
             m_spwn2 = Random.Range(0, 5);
         }
-        Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn1].transform.position, Quaternion.identity, transform);
+        Instantiate(spawnBlocks[0], m_spawnPoints[m_spwn1].transform.position, Quaternion.identity, transform);
         Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn2].transform.position, Quaternion.identity, transform);
         //Instantiate(block, transform.position, Quaternion.identity, transform);
         m_canSpawn = true;
