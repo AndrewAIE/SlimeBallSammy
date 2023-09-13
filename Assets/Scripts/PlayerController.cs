@@ -16,15 +16,17 @@ public class PlayerController : MonoBehaviour
     Vector2 m_slingVector;
     Vector2 m_slingDirection;
     Vector2 m_mousePos;
-    Vector3 m_worldSize;    
+    Vector3 m_worldSize;
 
-    [SerializeField]
-    private float m_slingLimit;
-    [SerializeField]
-    private float m_slingPower;
+
+    private float m_slingLimit = 1;
+    private float m_slingPower = 10;
     private float m_slingLength;
     private string m_collisionTag;
-    
+
+    private float m_detectionLength = 0.3f;
+    private float m_sphereDetection = 0.5f;
+
     private Animator m_animation;
     SphereCollider m_collider;
     
@@ -102,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     public void Stretch()
     {
-        RaycastHit hit;
+        
 
        
         m_sling.SetActive(true);
@@ -120,14 +122,18 @@ public class PlayerController : MonoBehaviour
         //Set Vector to new length and set sling "Handle" position
         m_slingVector = m_slingLength * m_slingDirection;
         m_sling.transform.position = new Vector3(m_playerPos.x + m_slingVector.x, m_playerPos.y + m_slingVector.y, -1);
+        
+        RaycastHit hit;
+
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
         //if there are any inconsistencies with physics, call physics in Fixed Update
-
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            if(Physics.SphereCast(m_playerPos, m_collider.radius, m_slingDirection * -1, out hit, 0.1f))
+            if(Physics.SphereCast(m_playerPos, m_collider.radius * m_sphereDetection, m_slingDirection * -1, out hit, m_detectionLength))
             {
-
+                Debug.Log("Can't fling");
+                m_sling.SetActive(false);
+                
             }
             else
             {
