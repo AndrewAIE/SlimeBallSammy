@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        Screen.SetResolution(576, 1024, false);
         m_sling = transform.GetChild(0).gameObject;
         m_playerBody = GetComponent<Rigidbody>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
@@ -101,9 +103,7 @@ public class PlayerController : MonoBehaviour
 
     public void Stretch()
     {
-        
-
-       
+           
         m_sling.SetActive(true);
         m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);    
 
