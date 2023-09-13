@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector2 m_slingPos;
     Vector2 m_slingVector;
     Vector2 m_slingDirection;
+    Vector2 m_mousePos;
     Vector3 m_worldSize;    
 
     [SerializeField]
@@ -103,8 +104,9 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
 
+       
         m_sling.SetActive(true);
-        m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);    
 
         //Create vector between the Mouse Position and the Player, along with its magnitude and normalization
         m_slingVector = m_slingPos - m_playerPos;
@@ -117,7 +119,7 @@ public class PlayerController : MonoBehaviour
         }
         //Set Vector to new length and set sling "Handle" position
         m_slingVector = m_slingLength * m_slingDirection;
-        m_sling.transform.position = m_playerPos + m_slingVector;
+        m_sling.transform.position = new Vector3(m_playerPos.x + m_slingVector.x, m_playerPos.y + m_slingVector.y, -1);
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
         //if there are any inconsistencies with physics, call physics in Fixed Update
 
