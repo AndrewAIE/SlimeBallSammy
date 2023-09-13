@@ -197,7 +197,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DestroyBlock(GameObject block)    {        
         //wait half a second, and then destroy block
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         //if player is still attached to block, detach
         if(block == transform.parent.gameObject)
         {
