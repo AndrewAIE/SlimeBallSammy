@@ -28,7 +28,7 @@ public class StarterBlock : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "KillZone")
         {
