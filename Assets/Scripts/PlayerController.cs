@@ -151,12 +151,10 @@ public class PlayerController : MonoBehaviour
     }
     public void Dying()
     {
-             
+        m_playerBody.rotation = Quaternion.identity;
         m_collider.enabled = false;
-        m_playerBody.useGravity = false;
         m_playerBody.velocity = Vector2.zero;
-        gameObject.transform.position = new Vector3(m_playerPos.x, m_playerPos.y, -1);
-        
+        gameObject.transform.position = new Vector3(m_playerPos.x, m_playerPos.y, -1);        
         StartCoroutine(DestroySammy());
         
 
@@ -225,7 +223,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator DestroySammy()
     {
         m_animation.Play("DeathAnimation");
-        m_playerBody.AddForce(Vector3.up * 0.25f, ForceMode.Impulse);
+        m_playerBody.AddForce(Vector3.up * 6.3f, ForceMode.Impulse);
         yield return new WaitForSeconds(1f); 
         Destroy(gameObject);
     }

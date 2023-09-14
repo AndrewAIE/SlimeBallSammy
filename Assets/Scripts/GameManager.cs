@@ -24,13 +24,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(EndGame());
         }
 
-        IEnumerator EndGame()
-        {
-            yield return new WaitForSeconds(6f);
-            SceneManager.LoadScene("MainMenu");
-
-
-        }
     }
 
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("MainMenu");
+    }
 }
