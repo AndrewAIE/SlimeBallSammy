@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4883575429798545401, guid: d550f516419b85441af50a6e59401cfb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4883575429798545401, guid: d550f516419b85441af50a6e59401cfb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -419,6 +419,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fallSpeed: 0.5
   m_startTimer: 3
+--- !u!65 &232964525
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232964518}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.625, y: 10, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &276176517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1610,6 +1623,10 @@ PrefabInstance:
     - target: {fileID: 15527797052199435, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
       propertyPath: m_Name
       value: Sammy
+      objectReference: {fileID: 0}
+    - target: {fileID: 15527797052199435, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 15527797052199437, guid: dc933507affa7bb4bbc2bd90c7484133, type: 3}
       propertyPath: m_slingPower
