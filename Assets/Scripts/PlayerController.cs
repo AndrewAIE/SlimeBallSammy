@@ -129,6 +129,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Can't fling");
                 m_sling.SetActive(false);
+                m_state = State.Stuck;
                 
             }
             else
@@ -202,7 +203,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "DeathToSammy")
         {

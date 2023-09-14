@@ -28,16 +28,15 @@ public class StarterBlock : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "KillZone")
+        if (other.gameObject.tag == "KillZone")
         {
+            Destroy(gameObject);
             if (GetComponentInChildren<Transform>() != null)
             {
                 GetComponentInChildren<PlayerController>().Detach();
             }
-
-            Destroy(gameObject);
         }
     }
 }
