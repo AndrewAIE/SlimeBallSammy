@@ -13,6 +13,7 @@ TagManager:
   - KillZone
   - SpawnZone
   - DeathToSammy
+  - Fake
   layers:
   - Default
   - TransparentFX

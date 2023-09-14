@@ -22,14 +22,15 @@ public class GameManager : MonoBehaviour
         if(!Samuel)
         {
             HighscoreTimer.PauseTimer();
-            StartCoroutine(EndGame());
+            EndGame();
         }
 
     }
 
-    IEnumerator EndGame()
+    private void EndGame()
     {
-        yield return new WaitForSeconds(2.5f);
-        DeathScreen.SetActive(true);        
+        
+        DeathScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

@@ -31,7 +31,7 @@ public class ButtonEvents : MonoBehaviour
     public void Start()
     {
         Screen.SetResolution(576, 1024, false);
-
+        Time.timeScale = 1f;
 
         // find active scene
         Active = SceneManager.GetActiveScene().name;
@@ -88,8 +88,8 @@ public class ButtonEvents : MonoBehaviour
 
     public void PlayGame()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene("PROTOTYPE1");
+        Time.timeScale = 1f;
         Start();
     }
 
