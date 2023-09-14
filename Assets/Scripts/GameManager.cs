@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject Samuel;
     public GameObject timer;
+    public GameObject DeathScreen;
 
     private HighscoreTimer HighscoreTimer;
 
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("MainMenu");
+        yield return new WaitForSeconds(2.5f);
+        DeathScreen.SetActive(true);        
     }
 }
