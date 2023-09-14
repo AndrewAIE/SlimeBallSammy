@@ -9,9 +9,11 @@ public class HighscoreTimer : MonoBehaviour
     private float timer = 0;
     public TMP_Text Highscore;
 
+    public bool timing = true;
+
     void Update()
     {
-        if (timer < 999999)
+        if (timing)
         {
             timer += Time.deltaTime;
 
@@ -20,6 +22,12 @@ public class HighscoreTimer : MonoBehaviour
 
         }
     }
+
+    public void PauseTimer()
+    {
+        timing = false;
+    }
+
 }
 
 

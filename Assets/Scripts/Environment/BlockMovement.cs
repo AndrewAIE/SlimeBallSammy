@@ -33,23 +33,16 @@ public class BlockMovement : MonoBehaviour
         m_fallSpeed = m_sb.blockFallSpeed;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "KillZone")
-        {
-            if(GetComponentInChildren<Transform>() != null)
+    public void OnTriggerEnter(Collider other)
+    {        
+        if (other.gameObject.tag == "KillZone")
+        {            
+            Destroy(gameObject);
+            if (GetComponentInChildren<Transform>() != null)
             {
                 GetComponentInChildren<PlayerController>().Detach();
-            }
-
-            Destroy(gameObject);
+            }            
         }   
-
-        if (other.tag == "Player")
-        {
-            StartCoroutine(FadeBlock(gameObject));
-        }
-
     }
 
     IEnumerator FadeBlock(GameObject block)

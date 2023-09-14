@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
-
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
         Stretch,
         Flying,
         Falling,
-        Dying
+        Dying,
+        Nothing
     }
     private State m_state = State.Stuck;
 
@@ -72,6 +73,9 @@ public class PlayerController : MonoBehaviour
             case State.Dying:
                 Dying();
                 break;
+            case State.Nothing:
+                Nothing();
+                break;
         }
         
         //if player leaves the side edges of the screen, they will appear on the other side
@@ -82,12 +86,7 @@ public class PlayerController : MonoBehaviour
         if (m_playerPos.x < -m_worldSize.x - transform.localScale.x)
         {
             gameObject.transform.position = new Vector3(m_worldSize.x, m_playerPos.y, 0);
-        }
-        //if player hits bottom of screen, they will die
-        if (m_playerPos.y < -m_worldSize.y)
-        {
-            m_state = State.Dying;
-        }
+        }       
     }
     
     public void Stuck()
@@ -152,11 +151,16 @@ public class PlayerController : MonoBehaviour
     }
     public void Dying()
     {
-        m_animation.Play("DeathAnimation");        
+             
         m_collider.enabled = false;
         m_playerBody.useGravity = false;
         m_playerBody.velocity = Vector2.zero;
-        StartCoroutine(ResetPosition());
+        gameObject.transform.position = new Vector3(m_playerPos.x, m_playerPos.y, -1);
+        
+        StartCoroutine(DestroySammy());
+        
+
+        m_state = State.Nothing;
     }
     public void OnCollisionEnter(Collision other)
     {
@@ -187,7 +191,7 @@ public class PlayerController : MonoBehaviour
                 break;
            case "Death":
                 m_state = State.Dying;
-                break;
+                break;           
         }
     }   
     public void OnCollisionExit(Collision other)
@@ -197,6 +201,14 @@ public class PlayerController : MonoBehaviour
         if(m_state == State.Stuck || m_state == State.Stretch)
         {
             Detach();
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "DeathToSammy")
+        {
+            m_state = State.Dying;
         }
     }
 
@@ -210,15 +222,16 @@ public class PlayerController : MonoBehaviour
         }
         Destroy(block);
     }
-    IEnumerator ResetPosition()
+    IEnumerator DestroySammy()
     {
-        yield return new WaitForSecondsRealtime(2f);
-        m_collider.enabled = true;
-        m_playerBody.useGravity = true;
-        transform.position = new Vector3(0, -2, 0);
-        m_playerBody.velocity = Vector2.zero;
-        m_state = State.Falling;
+        m_animation.Play("DeathAnimation");
+        m_playerBody.AddForce(Vector3.up * 0.25f, ForceMode.Impulse);
+        yield return new WaitForSeconds(1f); 
+        Destroy(gameObject);
     }
+    
+
+
     public void Detach()
     {
         //remove block as parent, and enter falling state
@@ -231,4 +244,10 @@ public class PlayerController : MonoBehaviour
             m_sling.SetActive(false);
         }
     }
+
+    public void Nothing()
+    {
+
+    }
+
 }
