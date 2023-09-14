@@ -30,24 +30,25 @@ public class ButtonEvents : MonoBehaviour
     // fix this later
     public void Start()
     {
+        Screen.SetResolution(576, 1024, false);
 
-       
+
         // find active scene
         Active = SceneManager.GetActiveScene().name;
-        
 
-       //if (Active == "OptionsMenu")
-       //{
-       //    DontDestroyOnLoad(this);
-       //}
-       //// || pines dont work?
-       //if (Active == "MainMenu")
-       //{
-       //    DontDestroyOnLoad(this);
-       //}
+
+        //if (Active == "OptionsMenu")
+        //{
+        //    DontDestroyOnLoad(this);
+        //}
+        //// || pines dont work?
+        //if (Active == "MainMenu")
+        //{
+        //    DontDestroyOnLoad(this);
+        //}
 
         // Managment for the Game Screen
-        
+
 
         //  GameplayCanvas = GameObject.FindObjectOfType<Canvas>();
         // 
@@ -60,8 +61,7 @@ public class ButtonEvents : MonoBehaviour
 
 
 
-
-
+     
     }
 
     void FindSomething(GameObject Menu, string MenuName)
