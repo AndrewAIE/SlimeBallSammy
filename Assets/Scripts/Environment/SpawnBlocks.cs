@@ -25,6 +25,7 @@ public class SpawnBlocks : MonoBehaviour
 
     private int m_spwn1;
     private int m_spwn2;
+    private int m_spwn3;
 
     private float m_shortestSpawnTime = 4.0f;
     private float m_longestSpawnTime = 5.5f;
@@ -65,12 +66,19 @@ public class SpawnBlocks : MonoBehaviour
         //}
         m_spwn1 = Random.Range(0, 5);
         m_spwn2 = Random.Range(0, 5);
-        while (m_spwn2 == m_spwn1)
+        m_spwn3 = Random.Range(0, 5);
+        while (m_spwn2 == m_spwn1 || m_spwn2 == m_spwn3 || m_spwn3 == m_spwn1)
         {
             m_spwn2 = Random.Range(0, 5);
+            m_spwn3 = Random.Range(0, 5);
         }
         Instantiate(spawnBlocks[0], m_spawnPoints[m_spwn1].transform.position, Quaternion.identity, transform);
         Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn2].transform.position, Quaternion.identity, transform);
+        int thrdBlckChance = Random.Range(0, 26);
+        if (thrdBlckChance <= 5)
+        {
+            Instantiate(spawnBlocks[Random.Range(0, 7)], m_spawnPoints[m_spwn3].transform.position, Quaternion.identity, transform);
+        }
         //Instantiate(block, transform.position, Quaternion.identity, transform);
         m_canSpawn = true;
         
