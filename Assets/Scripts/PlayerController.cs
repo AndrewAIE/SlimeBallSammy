@@ -8,9 +8,11 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     GameObject m_sling;
+    GameObject m_slingDicator;
 
     Vector2 m_playerPos;
     Vector2 m_slingPos;
+    Vector2 m_slingDicatorPos;
     Vector2 m_slingVector;
     Vector2 m_slingDirection;
     Vector2 m_mousePos;
@@ -46,10 +48,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         m_sling = transform.GetChild(0).gameObject;
+        m_slingDicator = transform.GetChild(1).gameObject;
         m_playerBody = GetComponent<Rigidbody>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         m_collider = GetComponent<SphereCollider>();
         m_animation = GetComponent<Animator>();
+        
     }
 
     private void Update()
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
     {
            
         m_sling.SetActive(true);
+        m_slingDicator.SetActive(true);
         m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);    
 
         //Create vector between the Mouse Position and the Player, along with its magnitude and normalization
@@ -117,7 +122,10 @@ public class PlayerController : MonoBehaviour
         //Set Vector to new length and set sling "Handle" position
         m_slingVector = m_slingLength * m_slingDirection;
         m_sling.transform.position = new Vector3(m_playerPos.x + m_slingVector.x, m_playerPos.y + m_slingVector.y, -1);
-        
+        //set arrow's position and rotation to display flight direction
+        m_slingDicator.transform.position = m_sling.transform.position - new Vector3(m_slingVector.x * 2, m_slingVector.y * 2, -1);
+        m_slingDicator.transform.up = m_slingVector * -1;
+
         RaycastHit hit;
 
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
@@ -126,16 +134,16 @@ public class PlayerController : MonoBehaviour
         {
             if(Physics.SphereCast(m_playerPos, m_collider.radius * m_sphereDetection, m_slingDirection * -1, out hit, m_detectionLength))
             {
-                Debug.Log("Can't fling");
-                m_sling.SetActive(false);
                 m_state = State.Stuck;
-                
+                m_sling.SetActive(false);
+                m_slingDicator.SetActive(false);                                
             }
             else
             {
                 m_state = State.Flying;
                 m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
                 m_sling.SetActive(false);
+                m_slingDicator.SetActive(false);
             }           
         }        
     }
