@@ -37,9 +37,14 @@ public class ButtonEvents : MonoBehaviour
     {
         if(Application.platform == RuntimePlatform.WindowsPlayer)
         {
-            Screen.SetResolution(576, 1024, false);
+            Screen.SetResolution(346, 615, false);
         }
         
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            Debug.Log(Screen.currentResolution);
+        }
+
         Time.timeScale = 1f;
 
         // find active scene
