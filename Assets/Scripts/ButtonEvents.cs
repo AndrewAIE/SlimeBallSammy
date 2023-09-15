@@ -94,6 +94,13 @@ public class ButtonEvents : MonoBehaviour
 
     }
 
+
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void  HoverPauseEnter()
     {
         m_overButton = true;
