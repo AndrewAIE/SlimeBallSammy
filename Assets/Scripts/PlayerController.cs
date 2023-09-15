@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     Vector2 m_mousePos;
     Vector3 m_worldSize;
 
+    public GameManager m_gameManager;
 
     private float m_slingLimit = 1;
     private float m_slingPower = 10;
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Screen.SetResolution(576, 1024, false);
         m_sling = transform.GetChild(0).gameObject;
         m_playerBody = GetComponent<Rigidbody>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
@@ -95,8 +95,7 @@ public class PlayerController : MonoBehaviour
         m_animation.Play("StickDown");
         if(Input.GetMouseButtonDown(0))
         {
-            m_state = State.Stretch;
-                     
+            m_state = State.Stretch;                     
         }
     }
 

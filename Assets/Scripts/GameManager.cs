@@ -9,12 +9,15 @@ public class GameManager : MonoBehaviour
     public GameObject timer;
     public GameObject DeathScreen;
 
+    public ButtonEvents ButtonEvents;
+
+    public GameObject pauseScreen;
+
     private HighscoreTimer HighscoreTimer;
 
     public void Awake()
     {
-        HighscoreTimer = timer.GetComponent<HighscoreTimer>();
-
+        HighscoreTimer = timer.GetComponent<HighscoreTimer>();        
     }
 
     public void Update()
@@ -24,13 +27,20 @@ public class GameManager : MonoBehaviour
             HighscoreTimer.PauseTimer();
             EndGame();
         }
-
     }
 
     private void EndGame()
-    {
-        
+    {        
         DeathScreen.SetActive(true);
         Time.timeScale = 0f;
+    }
+
+    public bool ClickerActive()
+    {
+        if(pauseScreen.gameObject.activeSelf || ButtonEvents.IsOverButton())
+        {
+            return false;
+        }
+        return true;
     }
 }

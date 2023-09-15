@@ -21,8 +21,13 @@ public class ButtonEvents : MonoBehaviour
     public GameObject [] SpawnerObjects;
 
     GameObject Transform_list;
+    public GameObject SAM;
 
     public Canvas GameplayCanvas;
+
+    public GameObject deathScene;
+
+    public bool m_overButton = false;
 
     //private Canvas _canvasGame;
     //private Canvas _canvasPause;
@@ -30,7 +35,11 @@ public class ButtonEvents : MonoBehaviour
     // fix this later
     public void Start()
     {
-        Screen.SetResolution(576, 1024, false);
+        if(Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            Screen.SetResolution(576, 1024, false);
+        }
+        
         Time.timeScale = 1f;
 
         // find active scene
@@ -59,9 +68,40 @@ public class ButtonEvents : MonoBehaviour
         //     _pauseMenu.SetActive(false);
         //  }
 
+    }
 
+    private void Update()
+    {
+        if(Active == "PROTOTYPE1" && !deathScene.gameObject.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(_pauseMenu.gameObject.activeSelf)
+                {
+                    BackToPlay();
+                }
+                else
+                {
+                    GoToPauseMenu();
+                }
+            }
+        }
 
-     
+    }
+
+    public void  HoverPauseEnter()
+    {
+        m_overButton = true;
+    }
+
+    public void HoverPauseExit()
+    {
+        m_overButton = false;
+    }
+
+    public bool IsOverButton()
+    {
+        return m_overButton;
     }
 
     void FindSomething(GameObject Menu, string MenuName)
@@ -96,10 +136,10 @@ public class ButtonEvents : MonoBehaviour
     public void BackToPlay()
     {
         _pauseMenu.SetActive(false);
-        for (int i = 0; i < GameFunctions.Length; i++)
-        {
-            GameFunctions[i].SetActive(true);
-        }
+       //for (int i = 0; i < GameFunctions.Length; i++)
+       //{
+       //    GameFunctions[i].SetActive(true);
+       //}
         Time.timeScale = 1f;
 
 
