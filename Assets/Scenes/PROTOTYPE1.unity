@@ -3379,6 +3379,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2010823793}
     - target: {fileID: 7672498570708698936, guid: 044f4f8ac7ae4c648ad1b01febd8b721, type: 3}
+      propertyPath: PauseButton
+      value: 
+      objectReference: {fileID: 2021873590}
+    - target: {fileID: 7672498570708698936, guid: 044f4f8ac7ae4c648ad1b01febd8b721, type: 3}
       propertyPath: GameFunctions.Array.size
       value: 4
       objectReference: {fileID: 0}

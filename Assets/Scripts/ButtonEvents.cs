@@ -15,6 +15,8 @@ public class ButtonEvents : MonoBehaviour
     static string Active;
     static string PreviousScene;
 
+    public GameObject PauseButton;
+
     public GameObject _pauseMenu;
 
     public GameObject [] GameFunctions;
@@ -126,6 +128,7 @@ public class ButtonEvents : MonoBehaviour
     /// </summary>
     public void GoToPauseMenu()
     {
+        PauseButton.SetActive(false);
         //FindSomething(_pauseMenu, "PauseMenu");
         _pauseMenu.SetActive(true);
 
@@ -162,6 +165,7 @@ public class ButtonEvents : MonoBehaviour
 
     public void BackToPlay()
     {
+        PauseButton.SetActive(true);
         _pauseMenu.SetActive(false);
        //for (int i = 0; i < GameFunctions.Length; i++)
        //{
