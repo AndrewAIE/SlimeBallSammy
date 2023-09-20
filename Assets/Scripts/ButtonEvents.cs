@@ -32,7 +32,9 @@ public class ButtonEvents : MonoBehaviour
     //private Canvas _canvasGame;
     //private Canvas _canvasPause;
 
-    // fix this later
+    /// <summary>
+    /// This fuction sets screen resolution baced on the users platform, and get the current scene on Start.
+    /// </summary>
     public void Start()
     {
         if(Application.platform == RuntimePlatform.WindowsPlayer)
@@ -75,6 +77,10 @@ public class ButtonEvents : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// checks every fram is esc was presed and if the requirements met then opens the pause menu
+    /// </summary>
+
     private void Update()
     {
         if(Active == "PROTOTYPE1" && !deathScene.gameObject.activeSelf)
@@ -95,32 +101,29 @@ public class ButtonEvents : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Quits game
+    /// </summary>
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    public void  HoverPauseEnter()
-    {
-        m_overButton = true;
-    }
-
-    public void HoverPauseExit()
-    {
-        m_overButton = false;
-    }
-
-    public bool IsOverButton()
-    {
-        return m_overButton;
-    }
+ /// <summary>
+ /// finds a an object using a its name and makes it as a GameObject.
+ /// (used for finding menus)
+ /// </summary>
+ /// <param name="Menu"></param>
+ /// <param name="MenuName"></param>
 
     void FindSomething(GameObject Menu, string MenuName)
     {
         Menu = GameObject.Find(MenuName);
     }
 
+    /// <summary>
+    /// change scene to pause menu
+    /// </summary>
     public void GoToPauseMenu()
     {
         //FindSomething(_pauseMenu, "PauseMenu");
@@ -129,6 +132,9 @@ public class ButtonEvents : MonoBehaviour
         Time.timeScale = 0f;
 
     }
+    /// <summary>
+    /// change scene to block guide
+    /// </summary>
 
     public void GoToGuide()
     {
@@ -140,12 +146,19 @@ public class ButtonEvents : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    /// <summary>
+    /// change scene to the game scene (prototype1)
+    /// </summary>
     public void PlayGame()
     {
         SceneManager.LoadScene("PROTOTYPE1");
         Time.timeScale = 1f;
         Start();
     }
+
+    /// <summary>
+    /// de-activates pause panel and un-pauses game.
+    /// </summary>
 
     public void BackToPlay()
     {
@@ -155,15 +168,22 @@ public class ButtonEvents : MonoBehaviour
        //    GameFunctions[i].SetActive(true);
        //}
         Time.timeScale = 1f;
-
-
     }
+
+    /// <summary>
+    /// goes back to previous scene
+    /// 
+    /// </summary>
 
     public void BackFromGuide()
     {
        
         SceneManager.LoadScene(PreviousScene);
     }
+
+    /// <summary>
+    /// change scene to main menu
+    /// </summary>
 
     public void MainMenu()
     {

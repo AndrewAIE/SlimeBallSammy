@@ -12,13 +12,18 @@ public class BackgroundScroll : MonoBehaviour
     public float _y;
     public float height;
 
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Collects screen height
+    /// </summary>
     void Start()
     {
         height = Screen.height;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Finds the size iof the image and reacts rectangle then loops it when the image is no longer in rectangle
+    /// </summary>
     void Update()
     {
         
