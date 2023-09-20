@@ -50,6 +50,14 @@ public class BlockMovement : MonoBehaviour
         m_fallSpeed = m_sb.blockFallSpeed;
     }
 
+    /// <summary>
+    /// OnTriggerEnter:
+    /// Does two functions.
+    /// Firstly it checks if blocks are entering the killzone and then if they are it willdestroy the block
+    /// 
+    /// Otherwise it will check to see if the player has touched a Fake block and then run the "FadeBlock" coroutine.
+    /// </summary>
+    /// <param name="other"></param>
     public void OnTriggerEnter(Collider other)
     {        
         if (other.gameObject.tag == "KillZone")
@@ -67,6 +75,14 @@ public class BlockMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// FadeBlock:
+    /// 
+    /// This function runs a loop for the fake blocks. Where every 0.05 seconds the block will change its opacity by 10% until it is invisible.
+    /// The block will then be destroyed to prevent this code running on an invisible block and causing a visual bug.
+    /// </summary>
+    /// <param name="block"></param>
+    /// <returns></returns>
     IEnumerator FadeBlock(GameObject block)
     {
         //Material mat = block.GetComponent<Material>();
@@ -86,6 +102,13 @@ public class BlockMovement : MonoBehaviour
         Destroy(block);
     }
 
+    /// <summary>
+    /// OnCollisionEnter:
+    /// 
+    /// When the player collides with a block, the block will change colour to take on a green tint. This is to easily show which block Sammy is on.
+    /// This will help people on mobile as their screens cut off some of the gameplay.
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
         newColour = new Color(0.75f, 1, 0.75f, 1);
@@ -94,6 +117,10 @@ public class BlockMovement : MonoBehaviour
         blockRenderer.material = newMaterial;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionExit(Collision collision)
     {
         newColour = new Color(1, 1, 1, 1);
