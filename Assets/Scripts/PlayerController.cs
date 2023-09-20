@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator m_animation;
     SphereCollider m_collider;
+    ParticleSystem m_splat;
     
     enum State
     {
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         m_collider = GetComponent<SphereCollider>();
         m_animation = GetComponent<Animator>();
-        
+        m_splat = GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -176,6 +177,7 @@ public class PlayerController : MonoBehaviour
         switch(m_collisionTag)
         {
             case "Block":
+                m_splat.Play();
                 m_state = State.Stuck;
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
@@ -183,11 +185,13 @@ public class PlayerController : MonoBehaviour
                 transform.SetParent(other.transform, true);
                 break;
            case "Ice":
+                m_splat.Play();
                 m_state = State.Stuck;
                 transform.SetParent(other.transform, true);
                 transform.up = other.contacts[0].normal;
                 break;
            case "Break":
+                m_splat.Play();
                 m_state = State.Stuck;
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
