@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator m_animation;
     SphereCollider m_collider;
+    AudioSource m_splatSound;
     ParticleSystem m_splat;
     
     enum State
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
         m_collider = GetComponent<SphereCollider>();
         m_animation = GetComponent<Animator>();
         m_splat = GetComponent<ParticleSystem>();
+        m_splatSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -178,6 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             case "Block":
                 m_splat.Play();
+                m_splatSound.Play();
                 m_state = State.Stuck;
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
@@ -186,12 +189,14 @@ public class PlayerController : MonoBehaviour
                 break;
            case "Ice":
                 m_splat.Play();
+                m_splatSound.Play();
                 m_state = State.Stuck;
                 transform.SetParent(other.transform, true);
                 transform.up = other.contacts[0].normal;
                 break;
            case "Break":
                 m_splat.Play();
+                m_splatSound.Play();
                 m_state = State.Stuck;
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
