@@ -108,7 +108,6 @@ public class BlockMovement : MonoBehaviour
     {
         newColour = new Color(0.75f, 1, 0.75f, 1);
         newMaterial.SetColor("_Color", newColour);
-        Debug.Log("Bolcok change colluuruj NOW");
         blockRenderer.material = newMaterial;
     }
 
@@ -121,7 +120,6 @@ public class BlockMovement : MonoBehaviour
     {
         newColour = new Color(1, 1, 1, 1);
         newMaterial.SetColor("_Color", newColour);
-        Debug.Log("Back to normal");
         blockRenderer.material = newMaterial;
     }
 

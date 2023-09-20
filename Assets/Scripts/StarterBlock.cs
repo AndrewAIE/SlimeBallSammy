@@ -9,7 +9,18 @@ public class StarterBlock : MonoBehaviour
     float m_timer = 0;
     [SerializeField]
     float m_startTimer;
-    
+
+    Color newColour;
+
+    Material newMaterial;
+
+    Renderer blockRenderer;
+
+    private void Start()
+    {
+        blockRenderer = gameObject.GetComponent<Renderer>();
+        newMaterial = new Material(blockRenderer.material);
+    }
 
     // Update is called once per frame
     void Update()
@@ -44,4 +55,18 @@ public class StarterBlock : MonoBehaviour
             }
         }
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        newColour = new Color(0.75f, 1, 0.75f, 1);
+        newMaterial.SetColor("_Color", newColour);
+        blockRenderer.material = newMaterial;
+    }
+    public void OnCollisionExit(Collision collision)
+    {
+        newColour = new Color(1, 1, 1, 1);
+        newMaterial.SetColor("_Color", newColour);
+        blockRenderer.material = newMaterial;
+    }
+
 }

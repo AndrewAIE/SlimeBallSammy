@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     AudioSource m_splatSound;
     ParticleSystem m_splat;
     
+
     enum State
     {
         Stuck,
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
         m_collider = GetComponent<SphereCollider>();
         m_animation = GetComponent<Animator>();
         m_splat = GetComponent<ParticleSystem>();
-        m_splatSound = GetComponent<AudioSource>();
+        m_splatSound = GetComponent<AudioSource>();        
     }
 
     private void Update()
@@ -103,7 +104,8 @@ public class PlayerController : MonoBehaviour
     {
         //If player clicks on "Player" enter stretch state
         m_animation.Play("StickDown");
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) 
+            && EventSystem.current.currentSelectedGameObject == null)
         {
             m_slingSpot = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
             m_slingPoint.transform.position = m_slingSpot;
@@ -138,10 +140,11 @@ public class PlayerController : MonoBehaviour
         m_slingDicator.transform.up = m_slingVector * -1;
 
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
-        //if there are any inconsistencies with physics, call physics in Fixed Update
+        
         RaycastHit hit;
         if (Input.GetMouseButtonUp(0))
         {
+            //If player is aiming back into the block, nothing will happen
             if(Physics.SphereCast(m_playerPos, m_collider.radius * m_sphereDetection, m_slingDirection * -1, out hit, m_detectionLength))
             {
                 m_state = State.Stuck;
@@ -188,8 +191,7 @@ public class PlayerController : MonoBehaviour
         m_sling.SetActive(false);
         m_slingDicator.SetActive(false);
         m_slingPoint.SetActive(false);
-        StartCoroutine(DestroySammy());
-        
+        StartCoroutine(DestroySammy());        
 
         m_state = State.Nothing;
     }
@@ -314,5 +316,4 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-
 }
