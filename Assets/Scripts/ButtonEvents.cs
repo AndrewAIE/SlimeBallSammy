@@ -130,11 +130,13 @@ public class ButtonEvents : MonoBehaviour
 
     }
 
-    public void GoToOptions()
+    public void GoToGuide()
     {
+        // dont destroy on load so then the music continues
+
          PreviousScene = SceneManager.GetActiveScene().name;
 
-        SceneManager.LoadScene("OptionsMenu");
+        SceneManager.LoadScene("BlockGuide");
         Time.timeScale = 1f;
     }
 
@@ -157,10 +159,9 @@ public class ButtonEvents : MonoBehaviour
 
     }
 
-    public void BackFromOptions()
+    public void BackFromGuide()
     {
-        //string _prevName;
-        //_prevName = PreviousScene.name;
+       
         SceneManager.LoadScene(PreviousScene);
     }
 
