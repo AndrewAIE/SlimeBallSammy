@@ -22,7 +22,7 @@ public class BackgroundScroll : MonoBehaviour
     }
 
     /// <summary>
-    /// Finds the size iof the image and reacts rectangle then loops it when the image is no longer in rectangle
+    /// Finds the size of the image and reacts rectangle then loops it when the image is no longer in rectangle
     /// </summary>
     void Update()
     {
