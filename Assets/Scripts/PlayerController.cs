@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    GameObject m_sling;
-    GameObject m_slingDicator;
-    GameObject m_slingPoint;
+    public GameObject m_sling;
+    public GameObject m_slingDicator;
+    public GameObject m_slingPoint;
 
     Vector2 m_playerPos;
     Vector2 m_slingPos;
@@ -44,16 +44,13 @@ public class PlayerController : MonoBehaviour
         Dying,
         Nothing
     }
-    private State m_state = State.Stuck;
+    private State m_state = State.Falling;
 
 
     private Rigidbody m_playerBody;
 
     private void Start()
     {
-        m_sling = transform.GetChild(0).gameObject;
-        m_slingDicator = transform.GetChild(1).gameObject;
-        m_slingPoint = transform.GetChild(2).gameObject;
         m_playerBody = GetComponent<Rigidbody>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         m_collider = GetComponent<SphereCollider>();
@@ -194,7 +191,7 @@ public class PlayerController : MonoBehaviour
                 m_playerBody.useGravity = false;
                 m_playerBody.velocity = Vector3.zero;
                 transform.up = other.contacts[0].normal;
-                transform.SetParent(other.transform, true);
+                transform.SetParent(other.transform, true);                
                 break;
            case "Ice":
                 m_splat.Play();

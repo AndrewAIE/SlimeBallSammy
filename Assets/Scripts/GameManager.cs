@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     }
     public void Start()
     {
-        // get ranbdom number for deat text
+        // get random number for deat text
         randomNumber = Random.Range(0, 100);
     }
 
