@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     GameObject m_sling;
     GameObject m_slingDicator;
+    GameObject m_slingPoint;
 
     Vector2 m_playerPos;
     Vector2 m_slingPos;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     Vector2 m_slingDirection;
     Vector2 m_mousePos;
     Vector3 m_worldSize;
+    Vector2 m_slingSpot;
 
     public GameManager m_gameManager;
 
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
     {
         m_sling = transform.GetChild(0).gameObject;
         m_slingDicator = transform.GetChild(1).gameObject;
+        m_slingPoint = transform.GetChild(2).gameObject;
         m_playerBody = GetComponent<Rigidbody>();
         m_worldSize = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height));
         m_collider = GetComponent<SphereCollider>();
@@ -102,44 +105,46 @@ public class PlayerController : MonoBehaviour
         m_animation.Play("StickDown");
         if(Input.GetMouseButtonDown(0))
         {
+            m_slingSpot = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            m_slingPoint.transform.position = m_slingSpot;
+            m_slingPoint.SetActive(true);
             m_state = State.Stretch;                     
         }
     }
 
     public void Stretch()
-    {
-           
+    {           
         m_sling.SetActive(true);
         m_slingDicator.SetActive(true);
         m_slingPos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);    
 
         //Create vector between the Mouse Position and the Player, along with its magnitude and normalization
-        m_slingVector = m_slingPos - m_playerPos;
+        m_slingVector = m_slingPos - m_slingSpot;
         m_slingLength = m_slingVector.magnitude;
-        m_slingDirection = m_slingVector.normalized;
+        m_slingDirection = m_slingVector.normalized;        
         //Limit the length the sling can be
         if (m_slingLength > m_slingLimit)
         {
             m_slingLength = m_slingLimit;
         }
         //Set Vector to new length and set sling "Handle" position
-        m_slingVector = m_slingLength * m_slingDirection;
-        m_sling.transform.position = new Vector3(m_playerPos.x + m_slingVector.x, m_playerPos.y + m_slingVector.y, -1);
+        m_sling.transform.position = m_slingPos;
+        m_slingVector = m_slingLength * m_slingDirection;        
         //set arrow's position and rotation to display flight direction
-        m_slingDicator.transform.position = m_sling.transform.position - new Vector3(m_slingVector.x * 2, m_slingVector.y * 2, -1);
+        m_slingDicator.transform.position = new Vector3(m_playerPos.x - m_slingVector.x, m_playerPos.y - m_slingVector.y, -1);
         m_slingDicator.transform.up = m_slingVector * -1;
-
-        RaycastHit hit;
 
         //On mouse up, remove from parent, add force and change state and turn off sling indicator
         //if there are any inconsistencies with physics, call physics in Fixed Update
+        RaycastHit hit;
         if (Input.GetMouseButtonUp(0))
         {
             if(Physics.SphereCast(m_playerPos, m_collider.radius * m_sphereDetection, m_slingDirection * -1, out hit, m_detectionLength))
             {
                 m_state = State.Stuck;
                 m_sling.SetActive(false);
-                m_slingDicator.SetActive(false);                                
+                m_slingDicator.SetActive(false);
+                m_slingPoint.SetActive(false);
             }
             else
             {
@@ -147,6 +152,7 @@ public class PlayerController : MonoBehaviour
                 m_playerBody.AddForce(m_slingVector * -m_slingPower, ForceMode.Impulse);
                 m_sling.SetActive(false);
                 m_slingDicator.SetActive(false);
+                m_slingPoint.SetActive(false);
             }           
         }        
     }
@@ -165,7 +171,10 @@ public class PlayerController : MonoBehaviour
         m_playerBody.rotation = Quaternion.identity;
         m_collider.enabled = false;
         m_playerBody.velocity = Vector2.zero;
-        gameObject.transform.position = new Vector3(m_playerPos.x, m_playerPos.y, -1);        
+        gameObject.transform.position = new Vector3(m_playerPos.x, m_playerPos.y, -1);
+        m_sling.SetActive(false);
+        m_slingDicator.SetActive(false);
+        m_slingPoint.SetActive(false);
         StartCoroutine(DestroySammy());
         
 
