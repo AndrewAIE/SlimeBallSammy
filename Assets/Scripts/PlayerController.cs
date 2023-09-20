@@ -96,6 +96,9 @@ public class PlayerController : MonoBehaviour
         }       
     }
     
+    /// <summary>
+    /// Update while in Stuck state
+    /// </summary>
     public void Stuck()
     {
         //If player clicks on "Player" enter stretch state
@@ -109,6 +112,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update while in Stretch state
+    /// </summary>
     public void Stretch()
     {           
         m_sling.SetActive(true);
@@ -153,16 +159,26 @@ public class PlayerController : MonoBehaviour
             }           
         }        
     }
+    /// <summary>
+    /// Update while in Flying state
+    /// </summary>
     public void Flying()
     {        
         m_animation.Play("FlyAnimation");
         transform.up = m_playerBody.velocity.normalized;
         transform.localScale = Vector3.one * 0.8f;
     }
+    /// <summary>
+    /// Update while in Falling state
+    /// </summary>
     public void Falling()
     {        
         m_animation.Play("FallAnimation");
     }
+
+    /// <summary>
+    /// Update while in Dying state
+    /// </summary>
     public void Dying()
     {
         m_playerBody.rotation = Quaternion.identity;
@@ -177,6 +193,11 @@ public class PlayerController : MonoBehaviour
 
         m_state = State.Nothing;
     }
+
+    /// <summary>
+    /// Detects what player is colliding iwth and acts appropriately
+    /// </summary>
+    /// <param name="other"></param>
     public void OnCollisionEnter(Collision other)
     {
         //check what type of block the player is colliding with
@@ -215,6 +236,10 @@ public class PlayerController : MonoBehaviour
                 break;           
         }
     }   
+    /// <summary>
+    /// Remove player from being child of block when no longer touching
+    /// </summary>
+    /// <param name="other"></param>
     public void OnCollisionExit(Collision other)
     {
         m_playerBody.useGravity = true;
@@ -225,6 +250,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroy player while in Kill Zone
+    /// </summary>
+    /// <param name="other"></param>
     public void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "DeathToSammy")
@@ -233,6 +262,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pause for one second and destroy block
+    /// </summary>
+    /// <param name="block"></param>
+    /// <returns></returns>
     IEnumerator DestroyBlock(GameObject block)    {        
         //wait half a second, and then destroy block
         yield return new WaitForSecondsRealtime(1f);
@@ -243,6 +277,10 @@ public class PlayerController : MonoBehaviour
         }
         Destroy(block);
     }
+    /// <summary>
+    /// Destroy player game object
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DestroySammy()
     {
         m_animation.Play("DeathAnimation");
@@ -252,7 +290,9 @@ public class PlayerController : MonoBehaviour
     }
     
 
-
+    /// <summary>
+    /// Seperate player from block
+    /// </summary>
     public void Detach()
     {
         //remove block as parent, and enter falling state
@@ -265,7 +305,9 @@ public class PlayerController : MonoBehaviour
             m_sling.SetActive(false);
         }
     }
-
+    /// <summary>
+    /// Update while in Nothing state
+    /// </summary>
     public void Nothing()
     {
 

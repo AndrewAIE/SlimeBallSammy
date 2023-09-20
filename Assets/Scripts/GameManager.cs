@@ -38,10 +38,13 @@ public class GameManager : MonoBehaviour
     }
     public void Start()
     {
-        // get random number for deat text
+        // get random number for death text
         randomNumber = Random.Range(0, 100);
     }
 
+    /// <summary>
+    /// Freeze game and open end screen
+    /// </summary>
     private void EndGame()
     { 
         
@@ -65,17 +68,7 @@ public class GameManager : MonoBehaviour
             DeathText.text = "Death is an inevitable part of life.";
 
         if (randomNumber <= 1)
-            DeathText.text = "you died, but im never gonna give you up...";
+            DeathText.text = "You died, but im never gonna give you up...";
 
-
-    }
-
-    public bool ClickerActive()
-    {
-        if(pauseScreen.gameObject.activeSelf || ButtonEvents.IsOverButton())
-        {
-            return false;
-        }
-        return true;
     }
 }

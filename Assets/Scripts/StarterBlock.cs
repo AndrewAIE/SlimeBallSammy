@@ -14,6 +14,7 @@ public class StarterBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Count up timer, once it has reached the desired number, start moving blocks
         if(m_isMoving)
         {
             transform.Translate(Vector3.down * m_fallSpeed * Time.deltaTime);            
@@ -28,6 +29,10 @@ public class StarterBlock : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If it's in the Kill Zone, it destroys itself
+    /// </summary>
+    /// <param name="other"></param>
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "KillZone")
