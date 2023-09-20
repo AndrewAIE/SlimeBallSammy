@@ -12,20 +12,16 @@ public class BlockMovement : MonoBehaviour
 
     public float m_fallSpeed;
 
-    //public GameObject m_spawnBlocks;
     private SpawnBlocks m_sb;
 
     private Renderer blockRenderer;
     private Color newColour;
     private Material newMaterial;
 
-    //private SpawnBlocks m_sb;
-
     // Start is called before the first frame update
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
-        //m_spawnBlocks = GetComponentInParent<GameObject>();
         m_sb = GetComponentInParent<SpawnBlocks>();
 
         blockRenderer = gameObject.GetComponent<Renderer>();
@@ -85,7 +81,6 @@ public class BlockMovement : MonoBehaviour
     /// <returns></returns>
     IEnumerator FadeBlock(GameObject block)
     {
-        //Material mat = block.GetComponent<Material>();
         float fade = 1;
 
         for (int i = 0; i < 11; i++)
@@ -118,7 +113,8 @@ public class BlockMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// OnCollisionExit:
+    /// WHen the player leaves a block, the block will revert back to its regular untinted colour.
     /// </summary>
     /// <param name="collision"></param>
     public void OnCollisionExit(Collision collision)
