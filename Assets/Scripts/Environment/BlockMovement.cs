@@ -15,6 +15,10 @@ public class BlockMovement : MonoBehaviour
     //public GameObject m_spawnBlocks;
     private SpawnBlocks m_sb;
 
+    private Renderer blockRenderer;
+    private Color newColour;
+    private Material newMaterial;
+
     //private SpawnBlocks m_sb;
 
     // Start is called before the first frame update
@@ -23,10 +27,19 @@ public class BlockMovement : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         //m_spawnBlocks = GetComponentInParent<GameObject>();
         m_sb = GetComponentInParent<SpawnBlocks>();
+
+        blockRenderer = gameObject.GetComponent<Renderer>();
+        newMaterial = new Material(blockRenderer.material);
+        
+
         if(tag == "Fake")
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, 0.6f);
         }
+
+        //var width = Camera.main.orthographicSize * 2.0 * Screen.width / Screen.height;
+        //Debug.Log("Width = " + width);
+        //transform.localScale = new Vector3(((float)width) / 9.0f, ((float)width) / 9.0f, ((float)width) / 9.0f);
     }
 
     // Update is called once per frame
@@ -47,22 +60,46 @@ public class BlockMovement : MonoBehaviour
                 GetComponentInChildren<PlayerController>().Detach();
             }            
         }   
+
+        if (gameObject.tag == "Fake")
+        {
+            StartCoroutine(FadeBlock(gameObject));
+        }
     }
 
     IEnumerator FadeBlock(GameObject block)
     {
-        Material mat = block.GetComponent<Material>();
+        //Material mat = block.GetComponent<Material>();
+        float fade = 1;
 
-        for (int i = 0; i < 26; i++)
+        for (int i = 0; i < 11; i++)
         {
-            Debug.Log("Womp");
-            Color color = mat.color;
-            color.a -= 10;
-            mat.color = color;
-            yield return new WaitForSeconds(0.2f);
-            block.GetComponent<Renderer>().material = mat;
+            Debug.Log("Womp " + newColour);
+
+            newColour = new Color(0.745f, 0.745f, 0.745f, fade);
+            newMaterial.SetColor("_Color", newColour);
+            blockRenderer.material = newMaterial;
+            fade -= 0.1f;
+            yield return new WaitForSeconds(0.05f);
         }
+
+        Destroy(block);
     }
 
-    
+    public void OnCollisionEnter(Collision collision)
+    {
+        newColour = new Color(0.75f, 1, 0.75f, 1);
+        newMaterial.SetColor("_Color", newColour);
+        Debug.Log("Bolcok change colluuruj NOW");
+        blockRenderer.material = newMaterial;
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        newColour = new Color(1, 1, 1, 1);
+        newMaterial.SetColor("_Color", newColour);
+        Debug.Log("Back to normal");
+        blockRenderer.material = newMaterial;
+    }
+
 }
