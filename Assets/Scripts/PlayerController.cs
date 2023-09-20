@@ -303,6 +303,8 @@ public class PlayerController : MonoBehaviour
         if (m_sling.activeInHierarchy== true)
         {
             m_sling.SetActive(false);
+            m_slingDicator.SetActive(false);
+            m_slingPoint.SetActive(false);
         }
     }
     /// <summary>
